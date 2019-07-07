@@ -1,26 +1,28 @@
 <template lang="pug">
 #app
     v-app
-        v-toolbar-title.headline(text-uppercase)
-            span Vuetify
-        .button-area
-            v-btn(color="success") hello
+        Header
+        Todolist
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import Vuetify from 'vuetify';
-import HelloWorld from './components/HelloWorld.vue';
+import Header from '@/components/Header.vue';
+import Todolist from '@/views/Todolist.vue';
 
 Vue.use(Vuetify);
 
 @Component({
     components: {
-        HelloWorld,
+        Header,
+        Todolist,
     },
 })
 
-export default class App extends Vue {}
+export default class App extends Vue {
+
+}
 </script>
 
 <style lang="stylus">
