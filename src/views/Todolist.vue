@@ -2,7 +2,13 @@
 #Todolist
     p.todayMark.font-weight-bold.font-italic TODAY
     p.dateText {{ today }}
-    p todos
+    p todo
+    p(v-for='list in todos') {{ list.todo }}
+        v-btn(@click='removeTask()') remove task
+    v-layout(row wrap)
+        v-flex(xs2)
+            v-text-field(label='write your task' hint='example: washing' persistent-hint outline v-model='newTask')
+            v-btn(@click='addNewTask()') add task
 </template>
 
 <script lang="ts">
@@ -12,6 +18,17 @@ import { Vue, Component } from 'vue-property-decorator';
 
 export default class Todolist extends Vue {
     private today = '';
+    private newTask: string = '';
+    private todos = [{}];
+    private addNewTask() {
+        const task = this.newTask;
+        if (task === '') {
+            return;
+        } else {
+            this.todos.push( { todo: this.newTask } );
+            this.newTask = '';
+        }
+    }
     private getTodayData() {
         const todayData = new Date();
         const year = todayData.getFullYear();
@@ -22,6 +39,7 @@ export default class Todolist extends Vue {
     }
     private mounted() {
         this.getTodayData();
+        this.todos.splice(0);
     }
 }
 </script>
