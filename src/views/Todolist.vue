@@ -3,11 +3,11 @@
     p.todayMark.font-weight-bold.font-italic TODAY
     p.dateText {{ today }}
     p todo
-    p(v-for='list in todos') {{ list.todo }}
-        v-btn(@click='removeTask()') remove task
+    p(v-for='list in todos' ref='todo') {{ list.todo }}
+        v-btn(@click='removeTask(list)') remove task
     v-layout(row wrap)
         v-flex(xs2)
-            v-text-field(label='write your task' hint='example: washing' persistent-hint outline v-model='newTask')
+            v-text-field(label='write your task' hint='example: washing' persistent-hint outline v-model='newTask' @keyup.enter='addNewTask()')
             v-btn(@click='addNewTask()') add task
 </template>
 
@@ -28,6 +28,10 @@ export default class Todolist extends Vue {
             this.todos.push( { todo: this.newTask } );
             this.newTask = '';
         }
+    }
+    private removeTask(list: string) {
+        const index = this.todos.indexOf(list);
+        this.todos.splice(index, 1);
     }
     private getTodayData() {
         const todayData = new Date();
