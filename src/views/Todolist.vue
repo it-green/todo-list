@@ -37,7 +37,7 @@ export default class Todolist extends Vue {
         const task: Task = {
             uuid: uuidv1(),
             content: this.newTask,
-        }
+        };
 
         // 上で生成したtaskをtodos配列にpush
         this.todos.push(task);
@@ -55,7 +55,6 @@ export default class Todolist extends Vue {
 
     private mounted() {
         this.getTodayData();
-        this.todos.splice(0);
     }
 
     private removeTask(uuid: string) {
