@@ -6,13 +6,13 @@
     //- todos -> 複数形
     //- todo -> 単数系
     //- todosの中にあるtodo ということで、todo in todos の方が良い
-    p(v-for='todo in todos') {{ todo.content }}
+    li.todos.font-weight-light.display-1(v-for='todo in todos') {{ todo.content }}
         //- クリックした要素のtodo.uuidをremoveTask関数の引数に渡す
-        v-btn(@click='removeTask(todo.uuid)') remove task
+        v-btn(@click='removeTask(todo.uuid)' color='error') remove task
     v-layout(row wrap)
         v-flex(xs2)
             v-text-field(label='write your task' hint='example: washing' persistent-hint outline v-model='newTask')
-            v-btn(@click='addNewTask()') add task
+            v-btn(@click='addNewTask()' color='primary') add task
 </template>
 
 <script lang="ts">
@@ -53,11 +53,15 @@ export default class Todolist extends Vue {
         this.today = todayText;
     }
 
+    private uuidTest() {
+        console.log(uuidv1());
+    }
+
     private mounted() {
         this.getTodayData();
     }
 
-    private removeTask(uuid: string) {
+    private removeTask(uuid: string ) {
         console.log(`uuidが${uuid}のtaskを削除`);
         /**
          * removeTask関数実行時に渡されたuuidのtaskを、this.todosから除外してthis.todosに除外された結果を再代入
@@ -82,4 +86,6 @@ export default class Todolist extends Vue {
         font-size: 18px
     .dateText
         font-size: 25px
+    .todos
+        list-style-type: none
 </style>
