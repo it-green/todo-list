@@ -20,11 +20,11 @@ Vue.use(Vuetify);
     },
 })
 
-export default class App extends Vue {
-
-}
+export default class App extends Vue {}
 </script>
 
 <style lang="stylus">
 @import '~vuetify/src/stylus/main'
+#app
+    background-color: #e0e0e0
 </style>

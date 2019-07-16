@@ -1,14 +1,13 @@
 <template lang="pug">
 #Todolist
-    p.todayMark.font-weight-bold.font-italic TODAY
-    p.dateText {{ today }}
-    p todo
-    p(v-for='todo in todos' ref='todo') {{ todo.content }}
-        v-btn(@click='removeTask(todo.uuid)') remove task
-    v-layout(row wrap)
-        v-flex(xs2)
+    .todoArea
+        p.dateText {{ today }}
+        p.font-weight-regular.title.font-italic todo
+        p(v-for='todo in todos' ref='todo') {{ todo.content }}
+            v-btn(@click='removeTask(todo.uuid)') remove task
+        v-flex(xs12)
             v-text-field(label='write your task' hint='example: washing' persistent-hint outline v-model='newTask' @keyup.enter='addNewTask()')
-            v-btn(@click='addNewTask()') add task
+        v-btn(@click='addNewTask()') add task
 </template>
 
 <script lang="ts">
@@ -25,13 +24,16 @@ export default class Todolist extends Vue {
 
     private addNewTask() {
         if (this.newTask === '') { return; }
-        // taskの生成
         const task: Task = {
             uuid: uuidv1(),
             content: this.newTask,
         };
         this.todos.push(task);
         this.newTask = '';
+    }
+
+    private removeTask(uuid: string) {
+        this.todos = this.todos.filter(todo =>  todo.uuid !== uuid);
     }
 
     private getTodayData() {
@@ -50,10 +52,16 @@ export default class Todolist extends Vue {
 </script>
 
 <style lang="stylus">
-    #Todolist
-        margin: 20px 50px
-    .todayMark
-        font-size: 18px
-    .dateText
-        font-size: 25px
+#Todolist
+    margin: 20px 50px
+    height: 85%
+.todoArea
+    margin: 0 auto
+    height: 100%
+    width: 40%
+    padding: 30px
+    border-radius: 10px
+    background-color: #f5f5f5
+.dateText
+    font-size: 25px
 </style>
