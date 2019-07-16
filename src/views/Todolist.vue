@@ -62,6 +62,5 @@ export default class Todolist extends Vue {
     padding: 30px
     border-radius: 10px
     background-color: #f5f5f5
-.dateText
     font-size: 25px
 </style>
