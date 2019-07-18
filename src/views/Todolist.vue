@@ -1,13 +1,15 @@
 <template lang="pug">
 #Todolist
-    .todoArea
+    .todoArea(ref='todoArea')
         p.dateText {{ today }}
         p.font-weight-regular.title.font-italic todo
         p(v-for='todo in todos' ref='todo') {{ todo.content }}
             v-btn(@click='removeTask(todo.uuid)') remove task
         v-flex(xs12)
             v-text-field(label='write your task' hint='example: washing' persistent-hint outline v-model='newTask' @keyup.enter='addNewTask()')
-        v-btn(@click='addNewTask()') add task
+        v-btn(@click='addNewTask()') add tas
+    .debug
+        v-btn(@click='dateDiscriminant()') debug
 </template>
 
 <script lang="ts">
@@ -36,6 +38,11 @@ export default class Todolist extends Vue {
         this.todos = this.todos.filter(todo =>  todo.uuid !== uuid);
     }
 
+    private dateDiscriminant() {
+        const checkValue = this.$refs.todoArea;
+        console.log(checkValue);
+    }
+
     private getTodayData() {
         const todayData = new Date();
         const year = todayData.getFullYear();
@@ -58,10 +65,11 @@ export default class Todolist extends Vue {
 .todoArea
     margin: 0 auto
     height: 100%
-    width: 40%
-    padding: 30px
+    width: 30%
+    padding: 2em
     border-radius: 10px
     background-color: #f5f5f5
+    // border: 5px solid #f57c00
 .dateText
     font-size: 25px
 </style>
