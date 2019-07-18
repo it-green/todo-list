@@ -1,6 +1,6 @@
 <template lang="pug">
 #Todolist
-    .todoArea(ref='todoArea')
+    .todoArea(v-show='drawFrame')
         p.dateText {{ today }}
         p.font-weight-regular.title.font-italic todo
         p(v-for='todo in todos' ref='todo') {{ todo.content }}
@@ -22,6 +22,7 @@ import { Task } from '@/types';
 export default class Todolist extends Vue {
     private today = '';
     private newTask: string = '';
+    private drawFrame: boolean = true;
     private todos: Task[] = [];
 
     private addNewTask() {
@@ -39,8 +40,7 @@ export default class Todolist extends Vue {
     }
 
     private dateDiscriminant() {
-        const checkValue = this.$refs.todoArea;
-        console.log(checkValue);
+
     }
 
     private getTodayData() {
