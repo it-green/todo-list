@@ -71,10 +71,12 @@ export default class Todolist extends Vue {
     margin: 0 auto
     height: 100%
     width: 30%
-    padding: 2em
     border-radius: 10px
     background-color: #f5f5f5
-    // border: 5px solid #f57c00
+.listHead
+    height: 4em
+    width: 100%
+    background-color: gray
 .dateText
     font-size: 25px
 </style>
