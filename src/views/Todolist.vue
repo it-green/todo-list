@@ -1,14 +1,14 @@
 <template lang="pug">
 #Todolist
     #todoArea
-        p.dateText {{ today }}
+        .listHead
+            p.dateText {{ today }}
         p.font-weight-regular.title.font-italic todo
         p(v-for='todo in todos' ref='todo') {{ todo.content }}
             v-btn(@click='removeTask(todo.uuid)') remove task
         v-flex(xs12)
             v-text-field(label='write your task' hint='example: washing' persistent-hint outline v-model='newTask' @keyup.enter='addNewTask()')
-        v-btn(@click='addNewTask()') add tas
-        v-btn(@click='drawFrame()') aaa
+        v-btn(@click='addNewTask()') add task
 </template>
 
 <script lang="ts">
