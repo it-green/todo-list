@@ -8,7 +8,6 @@
         v-flex(xs12)
             v-text-field(label='write your task' hint='example: washing' persistent-hint outline v-model='newTask' @keyup.enter='addNewTask()')
         v-btn(@click='addNewTask()') add tas
-        v-btn(@click='drawFrame()') aaa
 </template>
 
 <script lang="ts">
