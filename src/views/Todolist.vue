@@ -1,5 +1,6 @@
 <template lang="pug">
 #Todolist
+<<<<<<< HEAD
     #todoArea
         p.dateText {{ today }}
         p.font-weight-regular.title.font-italic todo
@@ -8,6 +9,21 @@
         v-flex(xs12)
             v-text-field(label='write your task' hint='example: washing' persistent-hint outline v-model='newTask' @keyup.enter='addNewTask()')
         v-btn(@click='addNewTask()') add tas
+=======
+    #todoArea(ref='todoArea')
+        .listHead
+            p.dateText.font-weight-bold {{ today }}
+        p.content-name.font-weight-bold.title.font-italic todo
+        .my-tasks
+            .todo-card(v-for='todo in todos')
+                p.my-task {{ todo.content }}
+                .rem-button-parent
+                    v-btn(@click='removeTask(todo.uuid)' color='error') remove task
+        .input-area
+            .input-area-child
+            v-text-field.task-write(label='write your task' hint='example: washing' persistent-hint outline v-model='newTask')
+            v-btn(@click='addNewTask()' color='success') add task
+>>>>>>> dev
 </template>
 
 <script lang="ts">
@@ -46,10 +62,8 @@ export default class Todolist extends Vue {
     }
 
     private drawFrame() {
-        const data: HTMLElement | null = document.getElementById('todoArea');
-        if (data === null) { return; }
         if ( this.today === this.today) {
-            data.setAttribute('style', 'border: 5px solid #f57c00');
+            (this.$refs.todoArea as HTMLElement).setAttribute('style', 'border: 5px solid #f57c00');
         } else {
             return;
         }
@@ -64,15 +78,42 @@ export default class Todolist extends Vue {
 
 <style lang="stylus">
 #Todolist
-    margin: 20px 50px
-    height: 85%
+    margin: 50px
 #todoArea
     margin: 0 auto
-    height: 100%
     width: 30%
-    padding: 2em
+    height: 600px
     border-radius: 10px
     background-color: #f5f5f5
+.listHead
+    height: 3em
+    width: 100%
+    border-bottom: solid 3px #4CAF50
 .dateText
+    margin: 0.3em 0 0 0.3em
     font-size: 25px
+    color: #757575
+.my-tasks
+    overflow: scroll
+    height: 65%
+.todo-card
+    background-color: #E0E0E0
+    border-top: 0.5px solid #BDBDBD
+    border-bottom: 0.5px solid #BDBDBD
+.rem-button-parent
+    text-align: right
+    padding-right: 0.3em
+.content-name
+    margin: 1em 0 1em 0.3em
+    color: #757575
+.my-tasks
+    word-wrap: break-word
+    height: 55%
+    margin-bottom: 1em
+.my-task
+    margin: 0.4em 0.5em 0 0.5em
+.input-area
+    max-width: 90%
+    text-align: right
+    margin: 0 auto
 </style>
