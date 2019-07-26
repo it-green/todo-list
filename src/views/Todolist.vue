@@ -2,7 +2,7 @@
 #Todolist
     #todoArea
         .listHead
-            p.dateText {{ today }}
+            p.dateText.font-weight-bold {{ today }}
         p.font-weight-regular.title.font-italic todo
         p(v-for='todo in todos' ref='todo') {{ todo.content }}
             v-btn(@click='removeTask(todo.uuid)') remove task
@@ -74,9 +74,11 @@ export default class Todolist extends Vue {
     border-radius: 10px
     background-color: #f5f5f5
 .listHead
-    height: 4em
+    height: 3em
     width: 100%
-    background-color: gray
+    border-bottom: solid 3px #4CAF50
 .dateText
+    margin: 0.3em 0 0 0.3em
     font-size: 25px
+    color: #757575
 </style>
