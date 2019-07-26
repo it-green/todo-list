@@ -1,6 +1,6 @@
 <template lang="pug">
 #Todolist
-    .todoArea(v-show='drawFrame')
+    #todoArea
         p.dateText {{ today }}
         p.font-weight-regular.title.font-italic todo
         p(v-for='todo in todos' ref='todo') {{ todo.content }}
@@ -8,8 +8,7 @@
         v-flex(xs12)
             v-text-field(label='write your task' hint='example: washing' persistent-hint outline v-model='newTask' @keyup.enter='addNewTask()')
         v-btn(@click='addNewTask()') add tas
-    .debug
-        v-btn(@click='dateDiscriminant()') debug
+        v-btn(@click='drawFrame()') aaa
 </template>
 
 <script lang="ts">
@@ -22,7 +21,6 @@ import { Task } from '@/types';
 export default class Todolist extends Vue {
     private today = '';
     private newTask: string = '';
-    private drawFrame: boolean = true;
     private todos: Task[] = [];
 
     private addNewTask() {
@@ -39,10 +37,6 @@ export default class Todolist extends Vue {
         this.todos = this.todos.filter(todo =>  todo.uuid !== uuid);
     }
 
-    private dateDiscriminant() {
-
-    }
-
     private getTodayData() {
         const todayData = new Date();
         const year = todayData.getFullYear();
@@ -52,8 +46,19 @@ export default class Todolist extends Vue {
         this.today = todayText;
     }
 
+    private drawFrame() {
+        const data: HTMLElement | null = document.getElementById('todoArea');
+        if (data === null) { return; }
+        if ( this.today === this.today) {
+            data.setAttribute('style', 'border: 5px solid #f57c00');
+        } else {
+            return;
+        }
+    }
+
     private mounted() {
         this.getTodayData();
+        this.drawFrame();
     }
 }
 </script>
@@ -62,7 +67,7 @@ export default class Todolist extends Vue {
 #Todolist
     margin: 20px 50px
     height: 85%
-.todoArea
+#todoArea
     margin: 0 auto
     height: 100%
     width: 30%
