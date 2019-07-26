@@ -83,6 +83,8 @@ export default class Todolist extends Vue {
     font-size: 25px
     color: #757575
 .my-tasks
+    border-top: 0.5px solid #BDBDBD
+    border-bottom: 0.5px solid #BDBDBD
     overflow: scroll
     height: 65%
 .todo-card
