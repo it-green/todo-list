@@ -1,6 +1,5 @@
 <template lang="pug">
 #Todolist
-<<<<<<< HEAD
     #todoArea
         p.dateText {{ today }}
         p.font-weight-regular.title.font-italic todo
@@ -9,7 +8,6 @@
         v-flex(xs12)
             v-text-field(label='write your task' hint='example: washing' persistent-hint outline v-model='newTask' @keyup.enter='addNewTask()')
         v-btn(@click='addNewTask()') add tas
-=======
     #todoArea(ref='todoArea')
         .listHead
             p.dateText.font-weight-bold {{ today }}
@@ -23,7 +21,6 @@
             .input-area-child
             v-text-field.task-write(label='write your task' hint='example: washing' persistent-hint outline v-model='newTask')
             v-btn(@click='addNewTask()' color='success') add task
->>>>>>> dev
 </template>
 
 <script lang="ts">
