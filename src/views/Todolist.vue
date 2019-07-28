@@ -70,7 +70,7 @@ export default class Todolist extends Vue {
     margin: 50px
 #todoArea
     margin: 0 auto
-    width: 30%
+    width: 20em
     height: 600px
     border-radius: 10px
     background-color: #f5f5f5
