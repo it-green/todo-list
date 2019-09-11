@@ -16,9 +16,10 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
+import { Vue, Component, Watch } from 'vue-property-decorator';
 import uuidv1 from 'uuid/v1';
 import { Task } from '@/types';
+import { watch, futimes } from 'fs';
 
 @Component
 
@@ -26,6 +27,8 @@ export default class Todolist extends Vue {
     private today = '';
     private newTask: string = '';
     private todos: Task[] = [];
+    private STORAGE_KEY = 'green-todolist';
+    private todoStorage = {};
 
     private addNewTask() {
         if (this.newTask === '') { return; }
@@ -62,6 +65,11 @@ export default class Todolist extends Vue {
         this.getTodayData();
         this.drawFrame();
     }
+
+    // @Watch('todos')
+    //     private saveStorage(todos: object) {
+    //         this.
+    //     }
 }
 </script>
 
