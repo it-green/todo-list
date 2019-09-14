@@ -33,7 +33,7 @@ export default class Todolist extends Vue {
         fetch: () => {
             this.todos = JSON.parse(
                 localStorage.getItem(this.STORAGE_KEY) || '[]',
-            )
+            );
             this.todos.forEach((task: any, index) => {
                 task.uuid = index;
             });
