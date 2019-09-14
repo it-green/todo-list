@@ -11,7 +11,7 @@
                     v-btn(@click='removeTask(todo.uuid)' color='error') remove task
         .input-area
             .input-area-child
-            v-text-field.task-write(label='write your task' hint='example: washing' persistent-hint outline v-model='newTask')
+            v-text-field.task-write(label='write your task' hint='example: washing' persistent-hint outline v-model='newTask' @keydown.meta.enter="addNewTask()")
             v-btn(@click='addNewTask()' color='success') add task
 </template>
 
