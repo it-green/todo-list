@@ -24,11 +24,25 @@ import { watch, futimes } from 'fs';
 @Component
 
 export default class Todolist extends Vue {
+    // ローカルストレージの記述
+    private STORAGE_KEY = 'todo-app';
     private today = '';
     private newTask: string = '';
     private todos: Task[] = [];
-    private STORAGE_KEY = 'green-todolist';
-    private todoStorage = {};
+    private storage = {
+        fetch: () => {
+            this.todos = JSON.parse(
+                localStorage.getItem(this.STORAGE_KEY) || '[]',
+            )
+            this.todos.forEach((task: any, index) => {
+                task.uuid = index;
+            });
+            return this.todos;
+        },
+        save: (todos: any) => {
+            localStorage.setItem(this.STORAGE_KEY, JSON.stringify(todos));
+        },
+    };
 
     private addNewTask() {
         if (this.newTask === '') { return; }
@@ -66,10 +80,15 @@ export default class Todolist extends Vue {
         this.drawFrame();
     }
 
-    // @Watch('todos')
-    //     private saveStorage(todos: object) {
-    //         this.
-    //     }
+    private created() {
+        this.todos = this.storage.fetch();
+    }
+
+    @Watch('todos')
+        private save() {
+            this.storage.save(this.todos);
+        }
+
 }
 </script>
 
