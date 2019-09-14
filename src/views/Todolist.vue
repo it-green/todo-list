@@ -11,21 +11,38 @@
                     v-btn(@click='removeTask(todo.uuid)' color='error') remove task
         .input-area
             .input-area-child
-            v-text-field.task-write(label='write your task' hint='example: washing' persistent-hint outline v-model='newTask')
+            v-text-field.task-write(label='write your task' hint='example: washing' persistent-hint outline v-model='newTask' @keydown.meta.enter="addNewTask()")
             v-btn(@click='addNewTask()' color='success') add task
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
+import { Vue, Component, Watch } from 'vue-property-decorator';
 import uuidv1 from 'uuid/v1';
 import { Task } from '@/types';
+import { watch, futimes } from 'fs';
 
 @Component
 
 export default class Todolist extends Vue {
+    // ローカルストレージの記述
+    private STORAGE_KEY = 'todo-app';
     private today = '';
     private newTask: string = '';
     private todos: Task[] = [];
+    private storage = {
+        fetch: () => {
+            this.todos = JSON.parse(
+                localStorage.getItem(this.STORAGE_KEY) || '[]',
+            )
+            this.todos.forEach((task: any, index) => {
+                task.uuid = index;
+            });
+            return this.todos;
+        },
+        save: (todos: any) => {
+            localStorage.setItem(this.STORAGE_KEY, JSON.stringify(todos));
+        },
+    };
 
     private addNewTask() {
         if (this.newTask === '') { return; }
@@ -62,6 +79,16 @@ export default class Todolist extends Vue {
         this.getTodayData();
         this.drawFrame();
     }
+
+    private created() {
+        this.todos = this.storage.fetch();
+    }
+
+    @Watch('todos')
+        private save() {
+            this.storage.save(this.todos);
+        }
+
 }
 </script>
 
